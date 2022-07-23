@@ -1,0 +1,361 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+  {% include "head.html" %}
+</head>
+
+<body>
+<!--wrapper start-->
+<div class="wrapper">
+
+  <!--== Start Preloader Content ==-->
+  <div class="preloader-wrap">
+    <div class="preloader">
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
+  </div>
+  <!--== End Preloader Content ==-->
+
+  <!--== Start Header Wrapper ==-->
+   {% include "nav.html" %}
+  <!--== End Header Wrapper ==-->
+  
+  <main class="main-content">
+    <!--== Start Hero Area Wrapper ==-->
+    <section class="home-slider-area">
+      <div class="swiper home-slider-container default-slider-container">
+        <div class="swiper-wrapper home-slider-wrapper slider-default">
+          <div class="swiper-slide">
+            <div class="slider-content-area" data-bg-img="{% static 'assets/img/slider/slider-bg.webp' %}">
+              <div class="container">
+                <div class="slider-container">
+                  <div class="row justify-content-between align-items-center">
+                    <div class="col-sm-6 col-md-6">
+                      <div class="slider-content">
+                        <div class="content">
+                          <div class="sub-title-box">
+                            <h5 class="sub-title">Heywanna </h5>
+                          </div>
+                          <div class="title-box">
+                            <h2 class="title w-[600px]">Heyvan Sahiblənin Xoşbəxt olun</h2>
+                          </div>
+                          <div class="btn-box">
+                            <a class="btn-theme text-dark" href="/about">Haqqımızda</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                      <div class="slider-thumb mousemove">
+                        <div class="thumb">
+                          <img src="{% static 'assets/img/slider/slider-01.webp' %}" width="585" height="579" alt="Image-HasTech">
+                          <div class="shape-one"></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="swiper-slide">
+            <div class="slider-content-two-area" data-bg-img="{% static 'assets/img/slider/slider-02.webp' %}">
+              <div class="container">
+                <div class="slider-container">
+                  <div class="row justify-content-sm-end justify-content-center align-items-center">
+                    <div class="col-sm-8 col-md-6">
+                      <div class="slider-content">
+                        <div class="content">
+                          <div class="sub-title-box">
+                            <h5 class="sub-title">Heywanna</h5>
+                          </div>
+                          <div class="title-box">
+                            <h2 class="title w-[700px]">Heyvan Sahiblənin Xoşbəxt olun</h2>
+                          </div>
+                          <div class="btn-box">
+                            <a class="btn-theme text-dark" href="shop.html">Sahiblən</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="home-overlay"></div>
+            </div>
+          </div>
+        </div>
+
+        <!--== Add Swiper Arrows ==-->
+        <div class="swiper-btn-wrap">
+          <div class="swiper-btn-prev">
+            <i class="pe-7s-angle-left"></i>
+          </div>
+          <div class="swiper-btn-next">
+            <i class="pe-7s-angle-right"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Hero Area Wrapper ==-->
+
+    <!--== Start Product Category Area Wrapper ==-->
+    <section class="product-area product-category-area bg-color-f2">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title shape-center text-center">
+              <h5 class="sub-title">ƏSAS KATEQORİYALAR</h5>
+              <h2 class="title">Heyvan kateqoriyaları</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5 row-gutter-43">
+          <div class="col ml-[260px]">
+            <!--== Start Product Category Item ==-->
+            <div class="product-category-item">
+              <div class="thumb">
+                <a href="/animals/pisiy"><img src="{% static 'assets/img/shop/category/1.webp' %}" width="200" height="200" alt="Image-HasTech"></a>
+              </div>
+              <div class="content">
+                <h3 class="title"><a href="/animals/pisiy">Pişiylər</a></h3>
+              </div>
+            </div>
+            <!--== End Product Category Item ==-->
+          </div>
+          
+          <div class="col">
+            <!--== Start Product Category Item ==-->
+            <div class="product-category-item">
+              <div class="thumb">
+                <a href="/animals/qus"><img src="{% static 'assets/img/shop/category/3.webp' %}" width="200" height="200" alt="Image-HasTech"></a>
+              </div>
+              <div class="content">
+                <h3 class="title"><a href="/animals/qus">Quş</a></h3>
+              </div>
+            </div>
+            <!--== End Product Category Item ==-->
+          </div>
+         
+          <div class="col">
+            <!--== Start Product Category Item ==-->
+            <div class="product-category-item">
+              <div class="thumb">
+                <a href="/animals/it"><img src="{% static 'assets/img/shop/category/4.webp' %}" width="200" height="200" alt="Image-HasTech"></a>
+              </div>
+              <div class="content">
+                <h3 class="title"><a href="/animals/it">İtlər</a></h3>
+              </div>
+            </div>
+            <!--== End Product Category Item ==-->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Product Category Area Wrapper ==-->
+
+    <!--== Start Product Area Wrapper ==-->
+    <section class="product-area product-default-area">
+      <div class="container pt--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title mb-45 mb-sm-20 shape-center text-center">
+              <h5 class="sub-title">Əsas heyvanlar</h5>
+              <h2 class="title">Yeni heyvanlar</h2>
+            </div>
+            <div class="isotope-filter">
+              <button class="active" data-filter="*">Hamısı</button>
+              <button data-filter=".filter_new">Yeni</button>
+              <button data-filter=".filter_best_sellers">Çox baxılan</button>
+              <button data-filter=".filter_featured">Seçilmişlər</button>
+            </div>
+          </div>
+        </div>
+        <div class="row isotope-grid">
+          {% for mehsul in mehsullar %}
+          {% if forloop.counter < 9 %}
+          
+          <div class="col-sm-6 col-lg-3 isotope-item filter_best_sellers filter_on_sall">
+            <!--== Start Product Item ==-->
+            <div class="product-item">
+              <div class="product-thumb">
+                <a href="heyvan/{{mehsul.id}}">
+                  <img src="{{mehsul.image.url}}" class="w-[270px] h-[320px]"alt="Image-HasTech">
+                </a>
+              </div>
+              <div class="product-info">
+                <h4 class="title"><a href="single-product.html">{{ mehsul.animal_category }}</a></h4>
+                <div class="prices">
+                  <span class="price">{{mehsul.author}}</span>
+                </div>
+              </div>
+              <div class="product-action">
+                <div class="product-action-links">
+                  <a href="heyvan/{{mehsul.id}}">
+                  <button type="button" class="btn-product-quick-view" data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
+                    <i class="pe-7s-look"></i>
+                  </button>
+                </a>
+                </div>
+              </div>
+            </div>
+            <!--== End prPduct Item ==-->
+          </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!--== End Product Area Wrapper ==-->
+
+    <!--== Start Divider Area Wrapper ==-->
+    <section class="bg-theme-color position-relative z-index-1">
+      <div class="container-fluid p--0">
+        <div class="row divider-style1">
+          <div class="col-lg-3 col-xl-4">
+            <div class="divider-thumb divider-thumb-left">
+              <img src="{% static 'assets/img/photos/divider1.webp' %}" width="351" height="435" alt="Image-HasTech">
+              <div class="shape-circle"></div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-xl-4">
+            <div class="divider-content text-center">
+              <h5 class="sub-title">Nə üçün biz</h5>
+              <p class="desc">Çünki siz burada rahatlığla pul ödəmədn yeni heyvana sahib ola bilərsiz.</p>
+              <a class="btn-theme text-dark" href="/all">Sahiblən</a>
+              <img class="shape-object" src="{% static 'assets/img/shape/object1.webp' %}" width="316" height="302" alt="Image-HasTech">
+            </div>
+          </div>
+          <div class="col-lg-3 col-xl-4">
+            <div class="divider-thumb divider-thumb-right">
+              <img src="{% static 'assets/img/photos/divider2.webp' %}" width="488" height="447" alt="Image-HasTech">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Divider Area Wrapper ==-->
+
+    <!--== Start About Area Wrapper ==-->
+    <section class="about-area">
+      <div class="container">
+        <div class="about-item position-relative ml-[100px]">
+          <div class="row align-items-center">
+            <div class="col-lg-6 order-2 order-lg-1">
+              <div class="about-content">
+                <div class="section-title shape-left">
+                  <h5 class="sub-title">Nə üçün heyvana sahib olum?</h5>
+                  <h2 class="title">Heyvan insanın dostudur</h2>
+                </div>
+                <p> Canlılar dünyası insanlardan, heyvanlardan və bitkilərdən ibarətdir.
+                  İlk çağlarda insanlar heyvanlar qorxurdular. Heyvanlardan qorunmaq üçün evlərini dağların yamaclarında, qayalıqlarda qururdular.
+                  Biz insanların başlıca yeməyi ət, süd, yumurta və yağ heyvanlardan təmin edilir. Geyindiyimiz şeylərin də bir hissəsi heyvanların dərisi, yun və quş tüklərindən hazırlanır. İnsan sağlamlığı üçün lazım olan peyvənd və serum da heyvanlardan alınır.
+                  </p>
+                <p>Əvvəllər heyvanları yalnız qida və səfər vasitəsi olaraq istifadə edən insanların zamanla dünyagörüşləri dəyişdi, onlara şəfqət göstərməyə, təlim verməyə, ram etməyə və onlarla dostluq qurmağa başladılar.</p>
+                <a class="btn-theme" href=".all">Sahiblən</a>
+              </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2">
+              <div class="about-thumb">
+                <img src="{% static 'assets/img/about/1.webp' %}" width="569" height="577" alt="Image-HasTech">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End About Area Wrapper ==-->
+
+    <!--== Start Blog Area Wrapper ==-->
+    <section class="blog-area blog-default-area">
+      <div class="container pt--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="section-title shape-center text-center">
+              <h5 class="sub-title">Yeniliklər</h5>
+              <h2 class="title">Blog yeniliyləri</h2>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-4">
+            <!--== Start Blog Item ==-->
+            <div class="post-item">
+              <div class="thumb">
+                <a href="/blog">
+                  <img src="{% static 'assets/img/blog/1.webp' %}" width="350" height="250" alt="Image-HasTech">
+                </a>
+              </div>
+              <div class="content">
+                <div class="meta">
+                  <ul>
+                    <li class="author-info"><span>By:</span> <a href="blog.html">Admin</a></li>
+                    <li class="post-date"><a href="/blog">Sep 24,2022</a></li>
+                  </ul>
+                </div>
+                <h4 class="title"><a href="/blog">Lorem ipsum dolor sit amet conse adipis.</a></h4>
+                <a class="btn-theme btn-sm" href="/blog">Read More</a>
+              </div>
+            </div>
+            <!--== End Blog Item ==-->
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <!--== Start Blog Item ==-->
+            <div class="post-item">
+              <div class="thumb">
+                <a href="/blog">
+                  <img src="{% static 'assets/img/blog/2.webp' %}" width="350" height="250" alt="Image-HasTech">
+                </a>
+              </div>
+              <div class="content">
+                <div class="meta">
+                  <ul>
+                    <li class="author-info"><span>By:</span> <a href="/blog">Admin</a></li>
+                    <li class="post-date"><a href="/blog">Sep 24,2022</a></li>
+                  </ul>
+                </div>
+                <h4 class="title"><a href="/blog">It is a long established fact that a reader will.</a></h4>
+                <a class="btn-theme btn-sm" href="/blog">Read More</a>
+              </div>
+            </div>
+            <!--== End Blog Item ==-->
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <!--== Start Blog Item ==-->
+            <div class="post-item">
+              <div class="thumb">
+                <a href="/blog">
+                  <img src="{% static 'assets/img/blog/3.webp' %}" width="350" height="250" alt="Image-HasTech">
+                </a>
+              </div>
+              <div class="content">
+                <div class="meta">
+                  <ul>
+                    <li class="author-info"><span>By:</span> <a href="blog.html">Admin</a></li>
+                    <li class="post-date"><a href="/blog">Sep 24,2022</a></li>
+                  </ul>
+                </div>
+                <h4 class="title"><a href="/blog">fashions fade, style is eternal About Upto.</a></h4>
+                <a class="btn-theme btn-sm" href="/blog">Read More</a>
+              </div>
+            </div>
+            <!--== End Blog Item ==-->
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Blog Area Wrapper ==-->
+  </main>
+
+
+
+  <!--== Scroll Top Button ==-->
+  <div id="scroll-to-top" class="scroll-to-top"><span class="fa fa-angle-up"></span></div>
+
+</div>
+{% include "footer.html" %}
+</body>
+
+</html>

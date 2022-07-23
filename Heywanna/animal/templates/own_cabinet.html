@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zxx">
+{% load static %}
+<head>
+    {% include "head.html" %}
+</head>
+
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+
+  <!--== Start Preloader Content ==-->
+  <div class="preloader-wrap">
+    <div class="preloader">
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
+  </div>
+  <!--== End Preloader Content ==-->
+
+{% include "nav.html" %}
+  
+  <main class="main-content mt-[130px]">
+    <!--== Start Page Header Area Wrapper ==-->
+    <div class="page-header-area mb-[30px]" data-bg-img="{% static 'assets/img/photos/bg1.webp' %}">
+      <div class="container pt--0 pb--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="page-header-content">
+              <h2 class="title">Wishlist</h2>
+              <nav class="breadcrumb-area">
+                <ul class="breadcrumb">
+                  <li><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-sep">//</li>
+                  <li>Wishlist</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--== End Page Header Area Wrapper ==-->
+    <div class="row ">
+        <div class="col-12">
+          <div class="shop-top-bar">
+            {% include "cabinet_select.html" %}
+          </div>
+        </div>
+      </div>
+    <!--== Start Wishlist Area Wrapper ==-->
+    {%if 'comment' in request.GET or checkNullVariable == request.GET %}
+        {% include 'own_cabinet_comment.html' %} 
+    {%else%}
+        {% include 'own_cabinet_notification.html' %} 
+    {%endif%}
+    <!--== End Wishlist Area Wrapper ==-->
+  </main>
+
+  <!--== Scroll Top Button ==-->
+  <div id="scroll-to-top" class="scroll-to-top"><span class="fa fa-angle-up"></span></div>
+</div>
+
+{% include "footer.html" %}
+<script>
+    function get(name1) {
+        if (name1 = (new RegExp('[?&]' + encodeURIComponent(name1) + '=([^&]*)')).exec(location.search))  //location.search give query sling part
+          return decodeURIComponent(name1[1]);
+      }
+    get('comment')
+    if(get('comment')){
+        document.getElementById('comment-placeholder').innerHTML= get('comment')
+    }
+    if(get('share')){
+        document.getElementById('share-placeholder').innerHTML= get('share')
+    }
+    if(get('notification')){
+        document.getElementById('notification-placeholder').innerHTML= get('notification')
+    }
+    function commentFilter(id){
+        if (id=="sort-comment"){
+            url=new URL(window.location.href);
+            url.search=""   
+            url.searchParams.set('comment',document.getElementById('sort-comment').value)
+            return url.toString()
+        }
+        else if(id=="sort-share"){
+            url=new URL(window.location.href);
+            url.search=""
+            url.searchParams.set('share',document.getElementById('sort-share').value)
+            return url.toString()
+        }
+        else if(id=="sort-notification"){
+            url=new URL(window.location.href);
+            url.search=""
+            url.searchParams.set('notification',document.getElementById('sort-notification').value)
+            console.log(url)
+            return url.toString()
+        }
+    }
+</script>
+</body>
+
+</html>

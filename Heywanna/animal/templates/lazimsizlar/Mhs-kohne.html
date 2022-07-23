@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Heywanna</title>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+    <script
+      src="https://kit.fontawesome.com/9d6ea7ed41.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="{% static 'css/product.css' %}" />
+    {% load extras %}
+  </head>
+  <body>
+    {% include 'nav.html' %}
+    <div class="container">
+      {% for mehsul in mehsullar %} 
+            {% if mehsul.image %}
+                    <div class="product-img-div">
+                      <img src="{{ mehsul.image.url }}" alt="" />
+                    </div>
+                    <div class="about-product-div">
+                      <h1>{{ mehsul.product_name }}</h1>
+                      <p class="product-content">{{ mehsul.product_content }}</p>
+                      <p class="product-content">
+                        Aquia sit amet, elitr, sed diam nonum eirmod tempor invidunt labore et
+                        dolore magna aliquyam.erat, sed diam voluptua. At vero accusam et
+                        justo duo dolores et ea rebum.
+                      </p>
+                      <form action="/sahiblenme/" method="post">
+                        {% csrf_token %} {% if request.user == mehsul.author %}
+                        <button type="submit" disabled class="owned" name="sahiblen">
+                          Sahiblən
+                        </button>
+                        {% else %}
+                        <button type="submit" class="owned" name="sahiblen">Sahiblən</button>
+                        {% endif %}
+                        <input type="hidden" name="mehsul_id" value="{{mehsul.id}}" />
+                      </form>
+                    </div>
+            {% endif %} 
+        {% endfor %}
+    </div>
+    <p style="font-size: 34px;font-family: Laila;margin: 60px 0 0 60px;color: rgba(0, 0, 0, 0.593);">       
+        Comments
+    </p>
+    <!-- Comments Form -->
+    <form action="/heyvan/productComment/" method="post">
+        {% csrf_token %}
+        <input type="text" name="comment" class="inp-comment" placeholder="Add comments"/>
+        <input type="hidden" name="productId" value="{{mehsul.id}}" />
+        <input type="hidden" name="parentId" value="" />
+        <button type="submit" class="comment-button" style="border: none; cursor: pointer; background-color: white">
+          <i style="font-size: 20px" class="fa-solid fa-share"></i>
+        </button>
+    </form>
+    {% comment %} Comment Place {% endcomment %} 
+    {% for comment in comments %}
+        <div class="comment-div">
+            <div class="comment-main">
+              <div class="usericon-div">
+                <i style="font-size: 30px; margin-right: 15px" class="fa-solid fa-circle-user"></i>
+                <h3 class="user-name">{{comment.user.username}}</h3>-
+                <p style="font-family: Nunito; color: #5b6a76ad;font-size: 12px;margin-left: 8px; ">
+                  {{comment.timestamp}}
+                </p>
+              </div>
+              <p class="comment-context">{{comment.comment}}</p>
+              <a class="reply-word" style="font-family: Nunito; margin-left: 20px; font-size: 18px" >
+                  Reply <i class="fa-solid fa-arrow-down"></i>
+                </a>
+              {% comment %} Reply Place Start{% endcomment %} 
+              {% for reply in replyDict|get_val:comment.id %}
+                <div class="reply-div" style="margin: 20px 0 0 30px">
+                  <div class="usericon-div">
+                    <i style="font-size: 30px; margin-right: 15px" class="fa-solid fa-circle-user"></i>
+                    <h3 class="user-name">{{reply.user.username}}</h3>-
+                    <p style="font-family: Nunito;color: #5b6a76ad;font-size: 12px;margin-left: 8px;">
+                      {{reply.timestamp}}
+                    </p>
+                  </div>
+                  <p class="reply-context">{{reply.comment}}</p>
+                </div>
+              {%endfor%}
+              <!-- Reply Form -->
+              <div class="inp-reply">
+                <form action="/heyvan/productComment/" method="post">
+                  {% csrf_token %}
+                  <input type="text" name="comment" placeholder="Enter reply here" />
+                  <input type="hidden" name="parentId" value="{{comment.id}}" />
+                  <input type="hidden" name="productId" value="{{mehsul.id}}" />
+                  <button type="submit" class="reply-button" style="border: none; cursor: pointer; background-color: white">
+                    <i style="font-size: 20px" class="fa-solid fa-share"></i>
+                  </button>
+                </form>
+              </div>
+              {% comment %} Reply Place End{% endcomment %}
+            </div>
+        </div>
+    {%endfor%} {% comment %} Comment Place End{% endcomment %}
+    <footer>
+      <div class="footer-header">
+        <h2><span>All kinds of services for cats and dogs</span></h2>
+      </div>
+      <div class="footer-adress">
+        <h6><span>Adress</span></h6>
+        <p>
+          Azərbaycan- <br />
+          Bakı-Neftçilər Qara Qarayev 77 m3
+        </p>
+      </div>
+      <div class="footer-info">
+        <h6><span>Info</span></h6>
+        <p>
+          info@email.com- <br />
+          +99455-637-51-18
+        </p>
+      </div>
+    </footer>
+    <script src="product.js"></script>
+  </body>
+</html>

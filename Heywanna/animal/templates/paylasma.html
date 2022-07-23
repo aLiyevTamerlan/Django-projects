@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zxx">
+{% load static %}
+<head>
+    {% include "head.html" %}
+</head>
+
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+
+  <!--== Start Preloader Content ==-->
+  <div class="preloader-wrap">
+    <div class="preloader">
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
+  </div>
+  <!--== End Preloader Content ==-->
+
+  {% include "nav.html" %}
+  <main class="main-content mt-[130px]">
+    <!--== Start Page Header Area Wrapper ==-->
+    <div class="page-header-area" data-bg-img="{% static 'assets/img/photos/bg1.webp' %}">
+      <div class="container pt--0 pb--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="page-header-content">
+              <h2 class="title">Products</h2>
+              <nav class="breadcrumb-area">
+                <ul class="breadcrumb">
+                  <li><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-sep">//</li>
+                  <li>Products</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start Product Area Wrapper ==-->
+    <section class="product-area">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-12">
+            <div class="shop-top-bar">
+              <div class="shop-top-left">
+                <p class="pagination-line"><a href="shop.html">12</a> Product Found of <a href="shop.html">30</a></p>
+              </div>
+              <div class="shop-top-right">
+                <div class="shop-sort">
+                  <span>Sort By :</span>
+                  <select class="form-select" aria-label="Sort select example">
+                    <option selected>Default</option>
+                    <option value="1">Popularity</option>
+                    <option value="2">Average Rating</option>
+                    <option value="3">Newsness</option>
+                    <option value="4">Price Low to High</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              
+             
+                  <div class="col-12">
+                    <div class="tab-content" id="nav-tabContent">
+                      <div class="tab-pane fade active show" id="nav-grid2" role="tabpanel" aria-labelledby="nav-grid2-tab">
+                        <div class="row">
+                          {% for mehsul in mehsullar %}
+                            {% if mehsul.image %}
+                              <div class="col-sm-6 col-xl-6">
+                                <!--== Start Product Item ==-->
+                                <div class="product-item">
+                                  <div class="product-thumb">
+                                    <a href="/heyvan/{{ mehsul.id }}">
+                                      <img src="{{mehsul.image.url}}" class="w-[420px] h-[320px]" alt="Image-HasTech">
+                                    </a>
+                                  </div>
+                                  <div class="product-info">
+                                    <h4 class="title"><a href="single-product.html">{{mehsul.animal_category}}</a></h4>
+                                    <div class="prices">
+                                      <span class="price">{{mehsul.product_name}}</span>
+                                    </div>
+                                  </div>
+                                  <div class="product-action">
+                                    <div class="product-action-links">
+                                      <button type="button" class="btn-product-quick-view" data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
+                                        <i class="pe-7s-look"></i>
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                                <!--== End prPduct Item ==-->
+                              </div>
+                            {% endif %}
+                          {% endfor %}
+                      <div class="col-12">
+                        <div class="pagination-items pagination-items-style1">
+                          <ul class="pagination justify-content-center mb--0">
+                            {% if page_obj.has_previous %}
+                                <li><a href="?page={{ page_obj.previous_page_number }}" class="icon"><i class="fa fa-angle-left"></i></a></li>
+                            {%endif%}
+                            {% for i in mehsullar.paginator.page_range%}
+                              {% if mehsullar.number == i %}
+                                <li><a class="active" href="?page={{i}}">{{i}}</a></li>
+                              {% else %}
+                                <li><a href="?page={{i}}">{{i}}</a></li>
+                              {%endif%}
+                            {%endfor%}
+                            {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}" class="icon"><i class="fa fa-angle-right"></i></a></li>
+                            {%endif%}
+                          </ul>                    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Product Area Wrapper ==-->
+  </main>
+
+  <!--== Scroll Top Button ==-->
+  <div id="scroll-to-top" class="scroll-to-top"><span class="fa fa-angle-up"></span></div>
+</div>
+
+{% include "footer.html" %}
+
+</body>
+
+</html>

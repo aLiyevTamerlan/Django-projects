@@ -1,0 +1,58 @@
+<div class="shop-top-right">
+    <div class="shop-sort">
+      <span>Sort By :</span>
+      <select class="form-select" name="sort-comment" id="sort-comment" onchange="location=commentFilter(id);" aria-label="Sort select example">
+        <option value="" id="comment-placeholder" disabled selected hidden>Comments</option>
+        <option value="Yanit">Yanit</option>
+        <option value="Comment">Comment</option>
+        <option value="Comments">Comments</option>
+      </select>
+    </div>
+</div>
+
+<div class="shop-top-right">
+    <div class="shop-sort">
+      <span>Sort By :</span>
+      <select class="form-select" name="" id="sort-notification" onchange="location=commentFilter(id);" aria-label="Sort select example">
+        <option value="" id="notification-placeholder" disabled selected hidden>Notifications</option>
+        <option value="Canceled">Cenceled</option>
+        <option value="Approved">Approved</option>
+        <option value="Unanswered">Unanswered</option>
+        <option value="Notifications">Notifications</option>
+      </select>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% comment %} <select name="sort-comment" id="sort-comment" onchange="location=commentFilter(id);" class="coments-filter">
+    <option value="" id="comment-placeholder" disabled selected hidden>Comments</option>
+    <option value="Yanit">Yanit</option>
+    <option value="Comment">Comment</option>
+    <option value="Comments">Comments</option>
+</select> {% endcomment %}
+{% comment %} <select name="" class="share-filter" id="sort-share" onchange="location=commentFilter(id);" class="coments-filter">
+    <option value="" id="share-placeholder" disabled selected hidden>Shares</option>
+    <option value="">New shares</option>
+    <option value="">Old shares</option>
+    <option value="">All</option>
+</select> {% endcomment %}
+  {% comment %} <select name="" class="owned-filter" id="sort-notification" onchange="location=commentFilter(id);" class="comments-filter">
+    <option value="" id="notification-placeholder" disabled selected hidden>Notifications</option>
+    <option value="Canceled">Cenceled</option>
+    <option value="Approved">Approved</option>
+    <option value="Unanswered">Unanswered</option>
+    <option value="Notifications">Notifications</option>
+</select> {% endcomment %}

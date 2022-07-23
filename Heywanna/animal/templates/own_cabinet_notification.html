@@ -1,0 +1,149 @@
+
+{% comment %} <div class="container ml-[200px]">
+    <div class="main">
+        <div class="comment-div">
+            <h1 style="margin-bottom: 20px;" class="text-center mt-[20px] font-bold text-[20px]">Şəxsi kabinet</h1>
+            <div class="filtering-div bg-transparent">
+                {% include 'cabinet_select.html' %} 
+            </div>
+            <div class="comment-list-div" style="margin-top: 30px;">
+                {% for bildiris in bildirisler %}
+                    {% if bildiris.tesdiq == True and request.user.username == bildiris.gonderen.username %} 
+                        <div class="comment-list-main mb-[20px]">
+                            <div class='flex items-center'>
+                                <div class="user-comment-div space-x-[-10px]">
+                                    <div class="comment-icon-div">
+                                        <i style="color:#66cc66" class="fa-solid fa-bell p-[5px]"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 10px;" class="comment-content">{{bildiris.qebul_eden}} sizin {{ bildiris.product }} adli sorgunuzu tesdiqledi</p>
+                                </div>
+                            </div>
+                            <img src="{{bildiris.product.image.url}}" class="cursor-pointer mb-[20px] w-[80px] h-[80px] object-cover" alt="">
+                        </div>
+                    {%endif%}
+                    {% if bildiris.tesdiq == False and request.user.username == bildiris.gonderen.username %} 
+                        <div class="comment-list-main mb-[20px]">
+                            <div class='flex items-center'>
+                                <div class="user-comment-div">
+                                    <div class="comment-icon-div">
+                                        <i style="color:#66cc66" class="fa-solid fa-bell p-[5px]"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p style="margin-bottom: 10px;" class="comment-content">{{bildiris.qebul_eden}} sizin {{ bildiris.product }} adli sorgunuzu ləğv elədi</p>
+                                </div>
+                            </div>
+                            <img src="{{bildiris.product.image.url}}" class="cursor-pointer mb-[20px] w-[80px] h-[80px] object-cover" alt="">
+                        </div>
+                    {%endif%}
+                    {%if request.user.username == bildiris.qebul_eden.username%} 
+                        <div class="comment-list-main mb-[20px] flex items-center">
+                            <div class="">
+                                <div class="user-comment-div flex space-x-[-30px]">
+                                    <div class="comment-icon-div">
+                                        <i style="color:#66cc66" class="fa-solid fa-bell p-[5px]"></i>
+                                    </div>
+                                    <div>
+                                        <p style="margin-bottom: 10px;" class="comment-content">{{bildiris.gonderen}} sizin {{ bildiris.product }} adli heyvanıvıza sahiblənmək istəyir</p>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    {% if bildiris.tesdiq == True %}
+                                        <button id="tesdiq" disabled  class="text-[green]"><i class="fa-solid fa-check text-[green]"></i> Tesdiqlendi</button>
+                                    {% elif bildiris.tesdiq == False %}
+                                        <button id="legv" disabled  class="text-[red]"><i class="fa-solid fa-xmark text-[red]"></i> Legv edildi</button>
+                                    {%else%}
+                                        <form action="/tesdiqle/legv/" method="post">
+                                            {% csrf_token %}
+                                            <div class="space-x-[20px]">
+                                                <button id="tesdiq"  name="tesdiq" class="space-x-[5px]"><i class="fa-solid fa-check text-[green] "></i> <span class="text-[green]">Tesdiq</span></button>
+                                                <button id="legv" name="legv" class="space-x-[5px]"><i class="fa-solid fa-trash-can text-[red]"></i> <span class="text-[red]">Legv</span></button>
+                                                <input type="hidden" name="bildiris_id" value="{{ bildiris.id }}">
+                                                <input type="hidden" name="bildiris_product_image" value="{{bildiris.product.image.url}}">
+                                            </div>
+                                        </form>
+                                    {%endif%}  
+                                </div>
+                            </div>
+                            <a href="/heyvan/{{ bildiris.product.id }}"><img src="{{bildiris.product.image.url}}" class="cursor-pointer mb-[20px] w-[80px] h-[80px] object-cover" alt=""></a>
+                        </div>
+                    {%endif%}
+                {%endfor%}
+            </div>
+            
+        </div>
+    </div>
+</div> {% endcomment %}
+<section class="shopping-wishlist-area">
+    <div class="container pt-[40px]">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="shopping-wishlist-form table-responsive">
+            <table class="table text-center">
+              
+              <tbody>
+                  {% for bildiris in bildirisler %}
+                      <tr class="tbody-item">
+                        
+                        {% if request.user.username == bildiris.gonderen.username or request.user.username == bildiris.qebul_eden.username %}
+                        <td class="product-remove">
+                            <a class="remove">{{forloop.counter}}</a>
+                          </td>
+                            <td class="product-thumbnail">
+                              <div class="thumb ml-[40px]">
+                                <a href="/heyvan/{{ bildiris.product.id }}">
+                                  <img src="{{bildiris.product.image.url}}" class="w-[80px] h-[70px]" alt="Image-HasTech">
+                                </a>
+                              </div>
+                            </td>
+                        
+                        {% endif %}
+                        
+                      {% if bildiris.tesdiq == True and request.user.username == bildiris.gonderen.username %}
+                          <td class="product-price">
+                              <span class="price">{{bildiris.qebul_eden}} sizin {{ bildiris.product }} adli sorgunuzu tesdiqledi</span>
+                          </td>
+                      {%endif%}
+                      {% if bildiris.tesdiq == False and request.user.username == bildiris.gonderen.username %}
+                          <td class="product-price">
+                              <span class="price">{{bildiris.qebul_eden}} sizin {{ bildiris.product }} adli sorgunuzu ləğv elədi</span>
+                          </td>
+                      {% endif %}
+                      {%if request.user.username == bildiris.qebul_eden.username%}
+                        <td class="product-stock-status">
+                          <span class="wishlist-in-stock">{{bildiris.gonderen}} sizin {{ bildiris.product }} adli heyvanıvıza sahiblənmək istəyir</span>
+                        </td>
+                          {% if bildiris.tesdiq == True %}
+                            <td class="product-add-to-cart">
+                              <button id="tesdiq" disabled  class="text-[green]"><i class="fa-solid fa-check text-[green]"></i> Tesdiqlendi</button>
+                            </td>
+                          {% elif bildiris.tesdiq == False %}
+                            <td class="product-add-to-cart">
+                                <button id="legv" disabled  class="text-[red]"><i class="fa-solid fa-xmark text-[red]"></i> Legv edildi</button>
+                            </td>
+                          {%else%}
+                          <form action="/tesdiqle/legv/" method="post">
+                              <td class="product-add-to-cart">
+                                  {% csrf_token %}
+                                  <div class="space-x-[20px]">
+                                      <button id="tesdiq"  name="tesdiq" class="space-x-[5px]"><i class="fa-solid fa-check text-[green] "></i> <span class="text-[green]">Tesdiq</span></button>
+                                      <button id="legv" name="legv" class="space-x-[5px]"><i class="fa-solid fa-trash-can text-[red]"></i> <span class="text-[red]">Legv</span></button>
+                                      <input type="hidden" name="bildiris_id" value="{{ bildiris.id }}">
+                                      <input type="hidden" name="bildiris_product_image" value="{{bildiris.product.image.url}}">
+                                  </div>
+                                  
+                              </td>
+                          </form>
+                          {%endif%}  
+                      {%endif%} 
+                      </tr>
+                    {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

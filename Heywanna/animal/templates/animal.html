@@ -1,0 +1,245 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+
+  <!--== Start Preloader Content ==-->
+  <div class="preloader-wrap">
+    <div class="preloader">
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
+  </div>
+  <!--== End Preloader Content ==-->
+
+  <!--== Start Header Wrapper ==-->
+  {% include "nav.html" %}
+  <!--== End Header Wrapper ==-->
+  
+  <main class="main-content mt-[130px]">
+    <!--== Start Page Header Area Wrapper ==-->
+    <div class="page-header-area" data-bg-img="{% static 'assets/img/photos/bg1.webp' %}">
+      <div class="container pt--0 pb--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="page-header-content">
+              <h2 class="title">Heyvanlar</h2>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start Product Area Wrapper ==-->
+    <section class="product-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="shop-top-bar">
+              <div class="shop-top-left">
+                <p class="pagination-line"><a href="shop.html">12</a> Product Found of <a href="shop.html">30</a></p>
+              </div>
+              <div class="shop-top-center">
+                <nav class="product-nav">
+                  <div class="nav nav-tabs justify-content-center" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="true"><i class="fa fa-th"></i></button>
+                    <button class="nav-link" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="false"><i class="fa fa-list"></i></button>
+                    <button class="nav-link" id="nav-grid2-tab" data-bs-toggle="tab" data-bs-target="#nav-grid2" type="button" role="tab" aria-controls="nav-grid2" aria-selected="false"><i class="fa fa-th-large"></i></button>
+                  </div>
+                </nav>
+              </div>
+              <div class="shop-top-right">
+                <div class="shop-sort">
+                  <span>Sort By :</span>
+                  <select class="form-select" name="sort" id="sort-list" onchange="location = finalurl();" aria-label="Sort select example">
+                    <option value="" id="placeholder" disabled selected hidden>Sort</option>
+                    <option id="product_name" value="animal_category">Məhsul kategoriya görə</option>
+                    <option id="-date_added" value="-date_added">Vaxta görə</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-between">
+          <div class="col-xl-9">
+            <div class="row">
+              <div class="col-12">
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-grid" role="tabpanel" aria-labelledby="nav-grid-tab">
+                    <div class="row">
+                      {% for mehsul in mehsullar %}
+                        {% if mehsul.image %}
+                          <div class="col-sm-6 col-xl-4">
+                            <!--== Start Product Item ==-->
+                            <div class="product-item">
+                              <div class="product-thumb">
+                                <a href="single-product.html">
+                                  <a href="/heyvan/{{ mehsul.id }}"><img src="{{ mehsul.image.url }}" class="w-[270px] h-[320px]" alt="Image-HasTech"></a>
+                                  </a>
+                              </div>
+                              <div class="product-info">
+                                <h4 class="title">{{ mehsul.animal_category }}</h4>
+                                <div class="prices">
+                                  <span class="price">{{mehsul.author}}</span>
+                                </div>
+                              </div>
+                              <div class="product-action">
+                                <button type="button" class="btn-product-quick-view" data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
+                                  <i class="pe-7s-look"></i>
+                                </button>
+                               
+                              </div>
+                            </div>
+                            <!--== End prPduct Item ==-->
+                          </div>
+                        {% endif %}
+                      {% endfor %}
+                      <div class="col-12">
+                        <div class="pagination-items pagination-items-style1">
+                          <ul class="pagination mb--0">
+                            
+                            <li><a href="shop.html" class="icon"><i class="fa fa-angle-left"></i></a></li>
+                            
+                            {% for i in mehsullar.paginator.page_range%}
+                              {% if mehsullar.number == i %}
+                                {% if ordering == None%}
+                                  <li><a class="active" href="?page={{i}}">{{i}}</a></li>
+                                {%else%}
+                                  <li><a class="active" href="?page={{i}}&ordering={{ordering}}">{{i}}</a></li>
+                                {%endif%}
+                              {% else %}
+                                {% if ordering == None%}
+                                  <li><a href="?page={{i}}">{{i}}</a></li>
+                                {%else%}
+                                  <li><a href="?page={{i}}&ordering={{ordering}}">{{i}}</a></li>
+                                {%endif%}
+                              {%endif%}
+                            {%endfor%}
+                            
+                            <li><a href="shop.html" class="icon"><i class="fa fa-angle-right"></i></a></li>
+                            
+                          </ul>                    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-3">
+            <div class="shop-sidebar">
+              <div class="shop-sidebar-search">
+                <div class="sidebar-search-form">
+                  
+                  <form action="/search/" method="post">
+                    {% csrf_token %}
+                    <div class="search-form position-relative">
+                      <input type="search"name="search" placeholder="Axtarış…">
+                      <button type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+              <div class="shop-widget shop-sidebar-category">
+                <h4 class="sidebar-title">Categoris</h4>
+                <div class="sidebar-category">
+                  <ul class="category-list mb--0">
+                    {% for category in categorys %}
+                      <li><a class="cursor-pointer">{{category.animal_category}}</a></li>
+                    {% endfor %}
+                    <li><a class="cursor-pointer">ləğv kategoriya</a></li>
+                  </ul>
+                </div>
+              </div>
+              <div class="shop-widget shop-sidebar-category">
+                <h4 class="sidebar-title">Cinsi</h4>
+                <div class="sidebar-category">
+                  <ul class="gender-list mb--0">
+                    <li><a class="cursor-pointer">erkek</a></li>
+                    <li><a class="cursor-pointer">disi</a></li>
+                    <li><a class="cursor-pointer">ləğv gen</a></li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="shop-widget shop-sidebar-tags">
+                <h4 class="sidebar-title">Heyvanlar</h4>
+                <div class="sidebar-tags">
+                  <ul class="tags-list mb--0">
+                    <li><a href="/animals/it">Itlər</a></li>
+                    <li><a href="/animals/pisiy">Pişiylər</a></li>
+                    <li><a href="/animals/qus">Quşlar</a></li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Product Area Wrapper ==-->
+  </main>
+
+  <!--== Scroll Top Button ==-->
+  <div id="scroll-to-top" class="scroll-to-top"><span class="fa fa-angle-up"></span></div>
+</div>
+{% include "footer.html" %}
+<!--=======================Javascript============================-->
+<script>
+  url = new URL(window.location.href);
+  // for getting the sorting status to be displayed in sorting dropdown placeholder
+  function get(name) {
+    if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))  //location.search give query sling part
+      return decodeURIComponent(name[1]);
+  }
+
+  if(get('ordering'))
+  document.getElementById('placeholder').innerHTML = document.getElementById(get('ordering')).innerHTML;
+
+
+  // for getting url after applying ordering
+  function finalurl() {
+    url.searchParams.set('ordering', document.getElementById("sort-list").value);
+    return url.toString()
+  }
+ 
+  ctgLi=document.querySelectorAll('.category-list li a')
+  ctgLi.forEach((item)=>{
+    item.addEventListener("click", function(){ 
+      if(item.innerHTML==="ləğv kategoriya"){
+        url.searchParams.delete("animal_category")
+      }
+      else{
+      url.searchParams.set("animal_category",item.innerHTML);
+      }
+      window.location=url
+    })
+  })
+  genLi=document.querySelectorAll(".gender-list li a")
+  genLi.forEach((item)=>{
+    item.addEventListener("click",function(){
+      if(item.innerHTML==="ləğv gen"){
+        url.searchParams.delete("animal_gender")
+      }
+      else{
+      url.searchParams.set("animal_gender",item.innerHTML);
+      }
+      window.location=url
+    })
+  })
+  </script>
+</body>
+
+</html>

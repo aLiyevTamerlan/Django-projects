@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heywanna</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous"> {% endcomment %}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{% static 'css/animal.css' %}">
+    <link rel="stylesheet" href="{% static 'css/nav.css' %}">
+</head>
+{% block body %}
+    {% include 'nav2.html' %}
+    <div class="product-card-header-img">
+        <p>Heyvan <span>Sahiblənmə Saytına </span> Xoş gəlmisiz </p>
+    </div>
+    <div class="product-card-title" style="margin-left:80px;margin-top:20px">
+        <p>İt seçənəyləri</p>
+    </div>
+    <div class="product-card-container flex">
+        <div class="product-card-images flex flex-wrap px-3 w-full">
+            {% for mehsul in mehsullar %}
+                {% if mehsul.image %}
+                        <!-- Link secimi vermek -->
+                        <div class="product-card ml-20">
+                            <div class="product-card-front">
+                               <img  src="{{ mehsul.image.url }}" alt="">
+                            </div>
+                           <div class="product-card-back">
+                            <a href="/heyvan/{{ mehsul.id }}"><h2>{{ mehsul.animal_category }}<br><span>by {{mehsul.author}}</span></h2></a>
+                            </div>
+                        </div>  
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="w-full md:w-1/3 shadow p-5 rounded-lg bg-white">
+          <div class="relative">
+          <div class="absolute flex items-center ml-2 h-full">
+            <svg class="w-4 h-4 fill-current text-primary-gray-dark" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.8898 15.0493L11.8588 11.0182C11.7869 10.9463 11.6932 10.9088 11.5932 10.9088H11.2713C12.3431 9.74952 12.9994 8.20272 12.9994 6.49968C12.9994 2.90923 10.0901 0 6.49968 0C2.90923 0 0 2.90923 0 6.49968C0 10.0901 2.90923 12.9994 6.49968 12.9994C8.20272 12.9994 9.74952 12.3431 10.9088 11.2744V11.5932C10.9088 11.6932 10.9495 11.7869 11.0182 11.8588L15.0493 15.8898C15.1961 16.0367 15.4336 16.0367 15.5805 15.8898L15.8898 15.5805C16.0367 15.4336 16.0367 15.1961 15.8898 15.0493ZM6.49968 11.9994C3.45921 11.9994 0.999951 9.54016 0.999951 6.49968C0.999951 3.45921 3.45921 0.999951 6.49968 0.999951C9.54016 0.999951 11.9994 3.45921 11.9994 6.49968C11.9994 9.54016 9.54016 11.9994 6.49968 11.9994Z"></path>
+            </svg>
+          </div>
+        
+          <input type="text" placeholder="Search by listing, location, bedroom number..." class="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm">
+            </div>
+        
+          <div class="flex items-center justify-between mt-4">
+            <p class="font-medium">
+            Filters
+            </p>
+        
+            <button class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-800 text-sm font-medium rounded-md" onclick="location=sub()">
+            Filteri axtar
+            </button>
+          </div>
+        
+          <div>
+            <div class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 gap-4 mt-4">
+            <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" name="sort" id="sort-list" onchange="location = finalurl();" style="margin-left: auto;">
+              <option value="" id="placeholder" disabled selected hidden>Sort</option>
+              <option id="product_name" value="product_name">Məhsul adına görə</option>
+              <option id="-date_added" value="-date_added">Vaxta görə</option>
+            </select>
+        
+            <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm flan birinci" id="animal_category">
+              <option value="" id="category-placeholder" disabled selected hidden>Heyvan növləri</option>
+              {% for category in categorys%}
+                <option value={{category.animal_category}}>{{category.animal_category}}</option>
+              {%endfor%}
+              <option value="legvCat">Ləğv etmək</option>
+            </select>
+            <select class="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm flan ikinci" id="animal_gender">
+              <option value="" id="gender-placeholder"  disabled selected hidden>Gender növləri</option>
+              <option value="erkek">erkek</option>
+              <option value="disi">disi</option>
+              <option value="legvGen">Ləğv etmək</option>
+            </select>
+            </div>
+          </div>
+          </div>
+    </div>
+    <div class="product-card-comment-container">
+        <div class="product-card-comment-title">
+          <div class="product-card-title">
+            <p>Məhşur klientlər nə deyir</p>
+          </div>
+        </div>
+        <div class="product-card-users-main">
+          <div class="product-card-users-comment">
+            <div class="product-card-comment">
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam enim nihil itaque 
+                temporibus totam sapiente rerum similique quo ipsa. 
+              </p>
+            </div>
+            <div class="product-card-client-image-div"><img src="http://themetechmount.com/prestashop/frizty/modules/ttmtestimonials/images/image-1.png" alt=""></div>
+
+          </div>
+          <div class="product-card-users-comment">
+            <div class="product-card-comment">
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam enim nihil itaque 
+                temporibus totam sapiente rerum similique quo ipsa. 
+              </p>
+            </div>
+            <div class="product-card-client-image-div"><img src="http://themetechmount.com/prestashop/frizty/modules/ttmtestimonials/images/image-2.png" alt=""></div>
+
+          </div>
+          <div class="product-card-users-comment">
+            <div class="product-card-comment">
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam enim nihil itaque 
+                temporibus totam sapiente rerum similique quo ipsa. 
+              </p>
+            </div>
+            <div class="product-card-client-image-div"><img src="http://themetechmount.com/prestashop/frizty/modules/ttmtestimonials/images/image-3.png" alt=""></div>
+          </div>
+          <div class="product-card-users-comment">
+            <div class="product-card-comment">
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ullam enim nihil itaque 
+                temporibus totam sapiente rerum similique quo ipsa. 
+              </p>
+            </div>
+            <div class="product-card-client-image-div"><img src="http://themetechmount.com/prestashop/frizty/modules/ttmtestimonials/images/294345e91032f6f65fbeba50736685d8.jpg" alt=""></div>
+          </div>
+        </div>
+        <div class="product-card-scroll-position-div">
+          <div class="product-card-scroll-position"><i class="fa-solid fa-arrow-left-long" id="scroll-left"></i></div>
+          <div class="product-card-scroll-position"><i class="fa-solid fa-arrow-right-long" id="scroll-right"></i></div>
+        </div>
+      </div>
+    <script>
+      // for getting the sorting status to be displayed in sorting dropdown placeholder
+      function get(name) {
+        if (name = (new RegExp('[?&]' + encodeURIComponent(name) + '=([^&]*)')).exec(location.search))  //location.search give query sling part
+          return decodeURIComponent(name[1]);
+      }
+
+      if(get('ordering'))
+      document.getElementById('placeholder').innerHTML = "Sort: " + document.getElementById(get('ordering')).innerHTML;
+
+
+      // for getting url after applying ordering
+      function finalurl() {
+        var url = new URL(window.location.href);
+        url.searchParams.set('ordering', document.getElementById("sort-list").value);
+        return url.toString()
+      }
+
+      </script>
+    <script src="{% static 'js/animal.js' %}"></script>
+{% endblock body %}
+</html>

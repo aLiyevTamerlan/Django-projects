@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+
+<head>
+    {% include "head.html" %}
+</head>
+
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+
+  <!--== Start Preloader Content ==-->
+  <div class="preloader-wrap">
+    <div class="preloader">
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
+  </div>
+  <!--== End Preloader Content ==-->
+
+  <!--== Start Header Wrapper ==-->
+  {% include "nav.html" %}
+  
+  <main class="main-content mt-[130px]">
+    <!--== Start Page Header Area Wrapper ==-->
+    <div class="page-header-area" data-bg-img="{% static 'assets/img/photos/bg1.webp' %}">
+      <div class="container pt--0 pb--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="page-header-content">
+              <h2 class="title">Products</h2>
+              <nav class="breadcrumb-area">
+                <ul class="breadcrumb">
+                  <li><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-sep">//</li>
+                  <li>Products</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start Product Area Wrapper ==-->
+    <section class="product-area">
+      <div class="container">
+        <div class="row justify-content-between">
+          <div class="col-12">
+            <div class="shop-top-bar">
+              <div class="shop-top-left flex justify-center">
+                <p class="pagination-line"><a>{{owns.paginator.count}} </a>heyvandan <a>4</a> ü göstərilib </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="row">
+              <div class="col-12">
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade  show active" id="nav-list" role="tabpanel" aria-labelledby="nav-list-tab">
+                    <div class="row">
+                        {% for own in owns %}
+                            <div class="col-12">
+                              <!--== Start Product Item ==-->
+                              <div class="product-item product-list-item">
+                                <div class="row">
+                                  <div class="col-lg-4">
+                                    <div class="product-thumb">
+                                      <a href="/heyvan/{{own.product.id}}">
+                                        <img src="{{own.image.url}}" width="420" height="320" alt="Image-HasTech">
+                                      </a>
+                                      <div class="product-action">
+                                        <div class="product-action-links">
+                                            <button type="button" class="btn-product-quick-view" data-bs-toggle="modal" data-bs-target="#action-QuickViewModal">
+                                              <i class="pe-7s-look"></i>
+                                            </button>
+                                          </div>
+                                       
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="col-lg-8">
+                                    <div class="product-info">
+                                      <h4 class="title"><a href="/heyvan/{{own.product.id}}">{{own.product.product_name}}</a></h4>
+                                      <div class="prices">
+                                        <span class="price">{{own.product.animal_category}}</span>
+                                      </div>
+                                      <p class="desc">{{own.product.product_content}}</p>
+                                      <a href="/heyvan/{{own.product.id}}"><button type="button" class="btn-theme btn-sm" data-bs-toggle="modal" data-bs-target="#action-CartAddModal">
+                                        Daxil ol
+                                      </button></a>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <!--== End prPduct Item ==-->
+                            </div>
+                        {% endfor %}
+                      <div class="col-12">
+                        <div class="pagination-items pagination-items-style1">
+                          <ul class="pagination justify-content-center mb--0">
+                            {% if page_obj.has_previous %}
+                                <li><a href="?page={{ page_obj.previous_page_number }}" class="icon"><i class="fa fa-angle-left"></i></a></li>
+                            {%endif%}
+                            {% for i in mehsullar.paginator.page_range%}
+                              {% if mehsullar.number == i %}
+                                <li><a class="active" href="?page={{i}}">{{i}}</a></li>
+                              {% else %}
+                                <li><a href="?page={{i}}">{{i}}</a></li>
+                              {%endif%}
+                            {%endfor%}
+                            {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}" class="icon"><i class="fa fa-angle-right"></i></a></li>
+                            {%endif%}
+                          </ul>                    
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Product Area Wrapper ==-->
+  </main>
+  <!--== Scroll Top Button ==-->
+  <div id="scroll-to-top" class="scroll-to-top"><span class="fa fa-angle-up"></span></div>
+</div>
+
+{% include "footer.html" %}
+
+</body>
+
+</html>

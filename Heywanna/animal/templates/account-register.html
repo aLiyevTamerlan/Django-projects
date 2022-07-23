@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+<head>
+    {% include "head.html" %}
+</head>
+
+<body>
+
+<!--wrapper start-->
+<div class="wrapper">
+
+  <!--== Start Preloader Content ==-->
+  <div class="preloader-wrap">
+    <div class="preloader">
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
+  </div>
+  <!--== End Preloader Content ==-->
+
+  <!--== Start Header Wrapper ==-->
+  {% include "nav.html" %}
+  <!--== End Header Wrapper ==-->
+  
+  <main class="main-content mt-[130px]">
+    <!--== Start Page Header Area Wrapper ==-->
+    <div class="page-header-area" data-bg-img="{% static 'assets/img/photos/bg1.webp' %}">
+      <div class="container pt--0 pb--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="page-header-content">
+              <h2 class="title">Register</h2>
+              <nav class="breadcrumb-area">
+                <ul class="breadcrumb">
+                  <li><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-sep">//</li>
+                  <li>Register</li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start My Account Area Wrapper ==-->
+    <section class="account-area">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <div class="register-form-content">
+              <form action="#">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="username">Username <span class="required">*</span></label>
+                      <input id="username" class="form-control" type="email">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="email">İstifadəçi adı <span class="required">*</span></label>
+                      <input id="email" class="form-control" type="text" name="qusername">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group">
+                      <label for="password">Password <span class="required">*</span></label>
+                      <input id="password" class="form-control" type="password" name="qpassword">
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group mb--0">
+                      <button class="btn-register">Qeydiyyat</button>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div class="form-group account-info-group mb--0">
+                      <div class="rememberme-account">
+                        <div class="form-check">
+                        </div>
+                      </div>
+                      <a class="lost-password ml-[500px]" href="/sign_in">Daxil ol</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End My Account Area Wrapper ==-->
+  </main>
+  <!--== Scroll Top Button ==-->
+  <div id="scroll-to-top" class="scroll-to-top"><span class="fa fa-angle-up"></span></div>
+</div>
+{% include "footer.html" %}
+
+</body>
+
+</html>

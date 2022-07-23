@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include "head.html" %}
+    {% load js %}
+</head>
+<body class="bg-[#e7eff1fd]">
+  {% include "nav.html" %}
+    <form action="" method="post" enctype="multipart/form-data" class="mt-[100px]">
+      {% csrf_token %}
+      <h1 style="" class="text-center mt-[40px] font-bold text-[25px]">Heyvan əlavə etmək</h1>
+        <div class="grid gap-6 mb-[100px] lg:grid-cols-2 mx-[100px] bg-white p-[60px] mt-[60px]">
+            <div>
+                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Məhsul adı</label>
+                <input type="text" name="animal_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Məhsul adı">
+            </div>
+            <div>
+                <label for="animal_type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Məhsul növü</label>
+                <select name="animal_type" id="animal_type" onchange="ch()"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value=""  disabled selected hidden>Məhsul növü</option>
+                    <option value="it">İt</option>
+                    <option value="pisiy" >Pisiy</option>
+                    <option value="qus" >Qus</option>
+                </select>
+            </div>
+            <div>
+              <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Məhsul kategoriyası</label>
+              <select name="animal_category" id="animal_category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <option value=""  disabled selected hidden>Məhsul kategoriyası</option>
+              </select>                 
+            </div>
+            <div>
+                <label for="animal_gender" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Məhsul cinsi</label>
+                <select name="animal_gender"  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value=""  disabled selected hidden>Məhsul cinsi</option>
+                    <option value="erkek">erkek</option>
+                    <option value="disi" >dişi</option>
+                </select>            
+            </div>  
+            
+            <div class="mb-6">
+                <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Məhsul şəkli</label>
+                <input type="file" name="animal_image">
+            </div> 
+            <div class="mb-6 ml-[20px]">
+                <label for="text" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Məhsul haqında</label>
+                <textarea name="animal_content" id="" cols="30" rows="10" class="border-solid border-2 w-[400px]"></textarea>
+            </div> 
+            <div></div>
+            <div class="flex flex-col-reverse ml-[240px]">
+                <button type="submit" class="self-center text-white bg-blue-700 hover:bg-blue-800 rounded px-5 py-1.5 text-center ">Təsdiqlə</button>
+            </div>
+            
+        </div>
+    </form>
+    {% include "footer.html" %}
+    <script type="text/javascript">
+      var dogCategory={{ dogCategorys | safe }};
+      var catCategory={{ catCategorys | safe }};
+      var birdCategory={{ birdCategorys | safe }};
+      dogCategoryArr=dogCategory.map(item=>{
+        return item.fields.animal_category
+      })
+      catCategoryArr=catCategory.map(item=>{
+        return item.fields.animal_category
+      })
+      birdCategoryArr=birdCategory.map(item=>{
+        return item.fields.animal_category
+      })
+      let dogCategoryFinalArr=[...new Set(dogCategoryArr)]
+      let catCategoryFinalArr=[...new Set(catCategoryArr)]
+      let birdCategoryFinalArr=[...new Set(birdCategoryArr)]
+        function ch(){
+          if(document.getElementById("animal_type").value==="it"){
+            var categorySelect=document.getElementById("animal_category")
+            while (categorySelect.options.length > 0) {                
+                categorySelect.remove(0);
+            }
+            var opt = document.createElement('option')
+            opt.innerHTML="Məhsul kategoriyası"
+            opt.disabled = true
+            opt.selected = true
+            opt.hidden=true
+            categorySelect.appendChild(opt)
+            dogCategoryFinalArr.forEach(item=>{
+              var opt = document.createElement('option');
+              opt.value=item
+              opt.innerHTML=item
+              categorySelect.appendChild(opt);
+            })
+          }
+          else if(document.getElementById("animal_type").value==="pisiy"){
+            var categorySelect=document.getElementById("animal_category")
+            while (categorySelect.options.length > 0) {                
+                categorySelect.remove(0);
+            }
+            var opt = document.createElement('option')
+            opt.innerHTML="Məhsul kategoriyası"
+            opt.disabled = true
+            opt.selected = true
+            opt.hidden=true
+            categorySelect.appendChild(opt)
+            catCategoryFinalArr.forEach(item=>{
+              var opt = document.createElement('option');
+              opt.value=item
+              opt.innerHTML=item
+              categorySelect.appendChild(opt);
+            })
+          }
+          else if(document.getElementById("animal_type").value==="qus"){
+            var categorySelect=document.getElementById("animal_category")
+            while (categorySelect.options.length > 0) {                
+                categorySelect.remove(0);
+            }
+            var opt = document.createElement('option')
+            opt.innerHTML="Məhsul kategoriyası"
+            opt.disabled = true
+            opt.selected = true
+            opt.hidden=true
+            categorySelect.appendChild(opt)
+            birdCategoryFinalArr.forEach(item=>{
+              var opt = document.createElement('option');
+              opt.value=item
+              opt.innerHTML=item
+              categorySelect.appendChild(opt);
+            })
+          }
+        }
+    </script>
+</body>
+</html>

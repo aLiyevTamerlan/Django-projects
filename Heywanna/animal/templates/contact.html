@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zxx">
+<head>
+    {% include "head.html" %}
+</head>
+<body>
+<!--wrapper start-->
+<div class="wrapper">
+
+  <!--== Start Preloader Content ==-->
+  <div class="preloader-wrap">
+    <div class="preloader">
+      <div class="dog-head"></div>
+      <div class="dog-body"></div>
+    </div>
+  </div>
+  <!--== End Preloader Content ==-->
+
+  <!--== Start Header Wrapper ==-->
+  {% include "nav.html" %}
+  <!--== End Header Wrapper ==-->
+  
+  <main class="main-content mt-[130px]">
+    <!--== Start Page Header Area Wrapper ==-->
+    <div class="page-header-area" data-bg-img="{% static 'assets/img/photos/bg1.webp' %}">
+      <div class="container pt--0 pb--0">
+        <div class="row">
+          <div class="col-12">
+            <div class="page-header-content">
+              <h2 class="title">Bizimlə əlaqə</h2>
+              <nav class="breadcrumb-area">
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--== End Page Header Area Wrapper ==-->
+
+    <!--== Start Contact Area Wrapper ==-->
+    <section class="contact-area contact-inner-area">
+      <div class="container">
+        <div class="row contact-page-wrapper">
+          <div class="col-xl-5">
+            <h4 class="contact-page-title">Biz buradyıq <br>Zəhmət olmasa əlaqə saxlayın.</h4>
+            <div class="contact-info-wrap">
+              <div class="contact-info">
+                <div class="row">
+                  <div class="col-12 col-lg-6 col-xl-12">
+                    <div class="info-item">
+                      <div class="icon">
+                        <img src="{% static 'assets/img/icons/c1.webp' %}" alt="Image-HasTech">
+                      </div>
+                      <div class="info">
+                        <h5 class="title">Address:</h5>
+                        <p>Adresimiz</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-6 col-xl-12">
+                    <div class="info-item">
+                      <div class="icon">
+                        <img src="{% static 'assets/img/icons/c2.webp' %}" alt="Image-HasTech">
+                      </div>
+                      <div class="info">
+                        <h5 class="title">Telefon:</h5>
+                        <p>
+                          <a href="tel://+00123456789">+00 123 456 789</a><br>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12 col-lg-6 col-xl-12">
+                    <div class="info-item">
+                      <div class="icon">
+                        <img src="{% static 'assets/img/icons/c3.webp' %}" alt="Image-HasTech">
+                      </div>
+                      <div class="info">
+                        <h5 class="title">Email:</h5>
+                        <p>
+                          <a href="mailto://demo@example.com">demo@example.com</a><br>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-7">
+            <h4 class="contact-page-title page-title-style2">Sual göndərin</h4>
+            <div class="contact-form-wrap">
+              <!--== Start Contact Form ==-->
+              <div class="contact-form">
+                <form action="" method="post" class="sign-up-form">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <input class="form-control" type="email" name="user_email" placeholder="Email *">
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group mb--0">
+                        <textarea class="form-control" name="user_message" placeholder="Mesaj"></textarea>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <div class="form-group mb--0">
+                        <button class="btn-theme" type="submit">Mesaj göndərin</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!--== End Contact Form ==-->
+
+              <!--== Message Notification ==-->
+              {% comment %} <div class="form-message"></div> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!--== End Contact Area Wrapper ==-->
+  </main>
+
+  <!--== Scroll Top Button ==-->
+  <div id="scroll-to-top" class="scroll-to-top"><span class="fa fa-angle-up"></span></div>
+</div>
+{% include "footer.html" %}
+</body>
+
+</html>
